@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:35:49 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/17 15:00:16 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/18 18:48:10 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,17 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	d = (char *)dst;
 	i = 0;
 	if (d > s)
+	{
 		while (len-- > 0)
 			d[len] = s[len];
+	}
 	else
+	{
 		while (i < len)
-			d[i] = s[i++];
+		{
+			d[i] = s[i];
+			i++;
+		}
+	}
 	return (dst);
 }
