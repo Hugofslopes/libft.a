@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 21:26:22 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/21 21:27:20 by hfilipe-         ###   ########.fr       */
+/*   Created: 2024/10/21 15:27:35 by hfilipe-          #+#    #+#             */
+/*   Updated: 2024/10/21 22:55:50 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
-void	*ft_memset(void *ptr, int c, size_t n)
+
+char	*ft_strjoin(char const *s1, char const *s2) 
 {
-	unsigned int	i;
-	unsigned char	*str;
-
-	i = 0;
-	str = (unsigned char *)ptr;
-	while (i < n)
-		str[i++] = (unsigned char)c;
-	return (ptr);
+	size_t	len1;
+	size_t	len2;
+	char	*result;
+	char	*temp;
+    
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	result = malloc(len1 + len2 + 1);
+	if (!result)
+	return NULL;
+	temp = result;
+	while(*s1)
+        *temp++ = *s1++;
+	while(*s2)
+        *temp++ = *s2++;
+    *temp = '\0';
+    return result;
 }
