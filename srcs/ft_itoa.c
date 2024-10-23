@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:14:29 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/22 19:41:21 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/23 11:11:44 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ static	int	nbnbs(long nb)
 	return (len);
 }
 
-char *n_zero(void){
-	char * str;
+char	*n_zero(void)
+{
+	char	*str;
 
 	str = (char *)malloc(2 * sizeof(char));
-	if(!str)
+	if (!str)
 		return (NULL);
 	str[0] = '0';
 	str[1] = '\0';
@@ -42,7 +43,7 @@ char	*ft_itoa(int n)
 {
 	size_t		i;
 	long int	j;
-	char		*str;	 
+	char		*str;
 
 	if (n == 0)
 		return (str = n_zero());
@@ -53,7 +54,8 @@ char	*ft_itoa(int n)
 		j *= -1;
 		i++;
 	}
-	if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!str)
 		return (NULL);
 	*(str + i) = 0;
 	while (i--)

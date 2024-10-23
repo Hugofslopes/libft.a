@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:02:16 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/21 23:05:07 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/23 11:07:40 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*dest;
-	size_t		i;
+	size_t	i;
 
 	i = 0;
-	if (s == NULL || start >= ft_strlen(s) || len == 0) 
+	if (s == NULL || start >= ft_strlen(s) || len == 0)
 	{
 		dest = malloc(1 * sizeof(char));
-		if (!dest) 
-			return (NULL); 
-        dest[0] = '\0';
-        return dest;
-    }
-    if (len > ft_strlen(s) - start) 
-        len = ft_strlen(s) - start;
-    dest = malloc((len + 1) * sizeof(char));
-    if (!dest) 
+		if (!dest)
+			return (NULL);
+		dest[0] = '\0';
+		return (dest);
+	}
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	dest = malloc((len + 1) * sizeof(char));
+	if (!dest)
 		return (NULL);
-	while ( i < len)
+	while (i < len)
 	{
-        dest[i] = s[start + i];
+		dest[i] = s[start + i];
 		i++;
 	}
-    dest[len] = '\0';
-    return (dest); 
+	dest[len] = '\0';
+	return (dest);
 }

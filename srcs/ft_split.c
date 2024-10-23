@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:25:49 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/22 22:19:24 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/23 10:51:36 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int fill_string(char ** new_string, char const *s, char delimeter,  size_t alloc
 			if (safe_malloc(&new_string, i , len + 1, allocated_size))
 				return (1);
 		ft_strlcpy(new_string[i], (char *)(s - len), len + 1);
-		new_string[i][len] = '\0';
 		i++;
 	}
 	new_string[i] = NULL;
