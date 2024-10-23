@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:13:25 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/23 17:17:13 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:24:09 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list *new_node;
+	t_list	*new_node;
 
 	if (!lst || !f)
 		return (NULL);
