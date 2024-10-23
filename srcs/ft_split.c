@@ -6,35 +6,52 @@
 /*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:25:49 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/23 10:51:36 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:02:44 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libft.h"
+#include "libft.h"
+#include <string.h>
 
-int	safe_malloc (char ***new_string, int position, size_t size, size_t allocated_size)
+char	*ft_strncpy(char *dest, const char *src, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+int	safe_malloc(char ***new_string, int position, size_t size, \
+size_t allocated_size)
 {
 	int	i;
 
 	i = 0;
-	if (position < 0 || position >= (int)allocated_size) 
-        return (1);
+	if (position < 0 || position >= (int)allocated_size)
+		return (1);
 	if (*new_string == NULL)
-        return (1);
+		return (1);
 	(*new_string)[position] = malloc(size * sizeof(char));
 	if (!(*new_string)[position])
 	{
 		while (i < position)
-		{	free((*new_string)[i]);
+		{
+			free((*new_string)[i]);
 			i++;
 		}
-		free(*new_string);
 		return (1);
 	}
 	return (0);
 }
 
-int fill_string(char ** new_string, char const *s, char delimeter,  size_t allocated_size)
+int	fill_string(char **new_string, char const *s, char delimeter, \
+size_t allocated_size)
 {
 	size_t	len;
 	int		i;
@@ -51,14 +68,14 @@ int fill_string(char ** new_string, char const *s, char delimeter,  size_t alloc
 			s++;
 		}
 		if (len)
-			if (safe_malloc(&new_string, i , len + 1, allocated_size))
+			if (safe_malloc(&new_string, i, len + 1, allocated_size))
 				return (1);
-		ft_strlcpy(new_string[i], (char *)(s - len), len + 1);
+		new_string[i] = ft_strncpy(new_string[i], (char *)(s - len), len);
 		i++;
 	}
 	new_string[i] = NULL;
 	return (0);
-} 
+}
 
 size_t	count_words(char const *s, char delimeter)
 {
@@ -69,20 +86,20 @@ size_t	count_words(char const *s, char delimeter)
 	in_word = 0;
 	while (*s)
 	{
-		if(*s == delimeter)
+		if (*s == delimeter)
 			in_word = 0;
 		else
 		{
-            if (in_word == 0) 
+			if (in_word == 0)
 			{
 				words++;
 				in_word = 1;
 			}
 		}
-	s++;
+		s++;
 	}
-	if (words == 0 && *s == '\0') 
-        words = 1; 
+	if (words == 0 && *s == '\0')
+		words = 1;
 	return (words);
 }
 
@@ -90,23 +107,26 @@ char	**ft_split(char const *s, char c)
 {
 	char	**new_string;
 	size_t	nr_words;
-	size_t allocated_size;
+	size_t	allocated_size;
 
 	if (!s)
 		return (NULL);
 	if (c == '\0')
 	{
-		if (!(new_string = malloc((ft_strlen(s)+ 1) * sizeof(char *))))
+		new_string = malloc((ft_strlen(s) + 1) * sizeof(char *));
+		if (!new_string)
 			return (NULL);
-		new_string[0] = (char *)s + (ft_strlen(s)+ 1);
+		new_string[0] = (char *)s + (ft_strlen(s) + 1);
 		return (new_string);
 	}
 	nr_words = count_words(s, c);
 	allocated_size = nr_words + 1;
-	if (!(new_string = malloc((nr_words + 1) * sizeof(char *))))
+	new_string = malloc((nr_words + 1) * sizeof(char *));
+	if (!new_string)
 		return (NULL);
 	if (fill_string(new_string, s, c, allocated_size))
-	{	free(new_string);
+	{
+		free(new_string);
 		return (NULL);
 	}
 	return (new_string);

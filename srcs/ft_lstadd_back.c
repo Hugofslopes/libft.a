@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 13:55:24 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/17 14:12:32 by hfilipe-         ###   ########.fr       */
+/*   Created: 2024/10/23 15:34:07 by hfilipe-          #+#    #+#             */
+/*   Updated: 2024/10/23 15:44:55 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <libft.h>
-#include <stdio.h>
+#include "libft.h"
 
-void ft_bzero(void *ptr, size_t n)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	unsigned int	i;
-	char			*str;
+	t_list	*temp_list;
 
-	i = 0;
-	str = (char *)ptr;
-	while (i < n)
-		str[i++] = '0'; //changed from '\0' to test
-	str[i] = '\0';
-printf("%s", str);
+	if (!new)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	temp_list = ft_lstlast(*lst);
+	temp_list->next = new;
 }
