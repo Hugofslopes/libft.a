@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:13:25 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/23 17:24:09 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:37:56 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,25 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_node;
+	t_list	*new_list;
+	t_list	*temp_list;
+	void	*set;
 
-	if (!lst || !f)
+	if (!lst || !f || !del)
 		return (NULL);
-	new_node = ft_lstnew(f(lst->content));
-	if (!new_node)
+	new_list = NULL;
+	while (lst)
 	{
-		del(new_node->content);
-        free(new_node);
-        return (NULL);
-        return (NULL);
+		set = f(lst->content);
+		temp_list = ft_lstnew(set);
+		if (!temp_list)
+		{
+			del(set);
+			ft_lstclear(&new_list, (*del));
+			return (new_list);
+		}
+		ft_lstadd_back(&new_list, temp_list);
+		lst = lst->next;
 	}
-	new_node->next = ft_lstmap(lst->next, f, del);
-	if (!new_node->next)
-	{
-		del(new_node->content);
-        free(new_node);
-        return (NULL);
-	}
-    return (new_node);
+	return (new_list);
 }
