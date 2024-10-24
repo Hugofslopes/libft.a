@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 21:49:08 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/23 11:14:13 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:54:05 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char	*str;
 	size_t	i;
 
+	if (!s || !f)
+		return (NULL);
 	i = 0;
 	str = ft_strdup((char *)s);
 	if (!str)

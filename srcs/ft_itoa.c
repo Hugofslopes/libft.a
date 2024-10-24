@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:14:29 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/23 11:11:44 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:48:25 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static	int	nbnbs(long nb)
 	return (len);
 }
 
-char	*n_zero(void)
+static char	*n_zero(void)
 {
 	char	*str;
 
@@ -64,6 +64,6 @@ char	*ft_itoa(int n)
 		j /= 10;
 	}
 	if (n < 0)
-		*(str + 0) = '-';
+		*str = '-';
 	return (str);
 }
