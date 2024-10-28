@@ -450,7 +450,7 @@ int main()
 //4
 	char	*strjoin3 = ft_strjoin("", "Hugo");
 	printf("\033[94mResult\033[0m %s\t\t\t", strjoin3);
-	printf("\033[95mExpected\033[0m Hugo \n");
+	printf("\033[95mExpected\033[0m Hugo \n\n");
 	free(strjoin3);
 
 
@@ -475,29 +475,52 @@ int main()
 	free(strtrim3);
 
 //4
-	char	*strtrim4 = ft_strtrim("Hugoxx Filxpe", "x");
+	char	*strtrim4 = ft_strtrim("Hugoxx Filxpe", "xx");
 	printf("\033[94mResult\033[0m %s\t\t", strtrim4);
-	printf("\033[95mExpected\033[0m Hugo Filixpe \n");
+	printf("\033[95mExpected\033[0m Hugo Filixpe \n\n");
 	free(strtrim4);
+
 
 //SPLIT
 	printf("\033[107mSplit\033[0m\n");
 //1
+	char	**split1;
+	split1 = ft_split("HotxDogxToday", 'x');
+	int i = 0;
+	while(split1[i] != NULL)
+	{
+		printf("\033[94mResult\033[0m %s ", split1[i]);
+		free(split1[i++]);
+	}
+	printf("\033[95mExpected\033[0m Hot Dog Today\n\n");
+	free(split1);
 
 
 //ITOA
 	printf("\033[107mItoa\033[0m\n");
 //1
+	printf("\033[94mResult\033[0m %s\t\t\t", ft_itoa(123213));
+	printf("\033[95mExpected\033[0m 123213 \n");
+
+//2
+	printf("\033[94mResult\033[0m %s\t\t\t", ft_itoa(-123213));
+	printf("\033[95mExpected\033[0m -123213 \n");
+
+//3
+	printf("\033[94mResult\033[0m %s\t\t\t", ft_itoa(+123213));
+	printf("\033[95mExpected\033[0m 123213 \n\n");
 
 
 //STRMAPI
-	printf("\033[107mStrjoin\033[0m\n");
+	printf("\033[107mStmapi\033[0m\n");
 //1
-
+	
 
 //STRITERI
-	printf("\033[107mStrjoin\033[0m\n");
+	printf("\033[107mStriteri\033[0m\n");
 //1
+	char mapi[]= "Lets Go!";
+	ft_striteri(mapi, ft_toupper())
 
 
 
