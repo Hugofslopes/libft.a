@@ -6,11 +6,11 @@
 #    By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/26 09:37:48 by hfilipe-          #+#    #+#              #
-#    Updated: 2024/10/26 10:01:19 by hfilipe-         ###   ########.fr        #
+#    Updated: 2024/10/28 20:52:32 by hfilipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+CC = cc
 CFLAGS = -Werror -Wextra -Wall
 SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c \
 ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c \
@@ -22,24 +22,32 @@ ft_putendl_fd.c ft_putnbr_fd.c
 BONUS_SRCS = ft_lstnew.c ft_lstadd_front.c \
 ft_lstsize.c ft_lstadd_back.c ft_lstlast.c ft_lstdelone.c ft_lstclear.c \
 ft_ft_lstiter.c ft_lstmap.c
+MAIN_SRCS = main.c
 OBJ = $(SRC:.c=.o)
 BONUS_OBJ = $(BONUS_SRCS:.c=.o)
+MAIN_OBJ = $(MAIN_SRCS:.c=.o)
+EXEC = main 	
 NAME = libft.a
 all: $(NAME)
-
 $(NAME): $(OBJ)
-	@ar rcs $@ $^
-
+	@ar rcs $@ $^	
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJ) $(BONUS_OBJ)
+	@rm -f $(OBJ) $(BONUS_OBJ) $(MAIN_OBJ)
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(EXEC)
 
-re: fclean all 
+re: fclean all
 
 bonus: $(BONUS_OBJ)
 	@ar rcs $(NAME) $(OBJ) $^
+
+main: $(EXEC)
+$(EXEC): $(MAIN_OBJ) $(OBJ) $(BONUS_OBJ)
+	$(CC) $(CFLAGS) -o $@ $^ -lbsd -g 
+
+val: $(EXEC)
+	valgrind --leak-check=full ./$(EXEC)
