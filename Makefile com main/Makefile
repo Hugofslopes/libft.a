@@ -6,12 +6,10 @@
 #    By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/26 09:37:48 by hfilipe-          #+#    #+#              #
-#    Updated: 2024/10/30 16:40:48 by hfilipe-         ###   ########.fr        #
+#    Updated: 2024/10/29 16:30:50 by hfilipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-RM = rm -f
 CC = cc
 CFLAGS = -Werror -Wextra -Wall
 SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c \
@@ -21,11 +19,15 @@ ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c \
 ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_split.c ft_itoa.c \
 ft_strtrim.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
 ft_putendl_fd.c ft_putnbr_fd.c
-BONUS_SRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstadd_back.c \
-ft_lstlast.c ft_lstdelone.c ft_lstclear.c ft_ft_lstiter.c ft_lstmap.c
+BONUS_SRCS = ft_lstnew.c ft_lstadd_front.c \
+ft_lstsize.c ft_lstadd_back.c ft_lstlast.c ft_lstdelone.c ft_lstclear.c \
+ft_ft_lstiter.c ft_lstmap.c
+MAIN_SRCS = main.c
 OBJ = $(SRC:.c=.o)
-BONUS_OBJ = $(BONUS_SRCS:.c=.o) 
-
+BONUS_OBJ = $(BONUS_SRCS:.c=.o)
+MAIN_OBJ = $(MAIN_SRCS:.c=.o)
+EXEC = main 	
+NAME = libft.a
 all: $(NAME)
 $(NAME): $(OBJ)
 	@ar rcs $@ $^	
@@ -33,12 +35,17 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJ) $(BONUS_OBJ)
+	@rm -f $(OBJ) $(BONUS_OBJ) $(MAIN_OBJ)
 
 fclean: clean
 	@rm -f $(NAME) $(EXEC)
 
 re: fclean all
 
-bonus: $(OBJ) $(BONUS_OBJ)
-	@ar rcs $(NAME) $^
+bonus: $(BONUS_OBJ)
+	@ar rcs $(NAME) $(OBJ) $^
+
+main: $(EXEC)
+$(EXEC): $(MAIN_OBJ) $(OBJ) $(BONUS_OBJ)
+	$(CC) $(CFLAGS) -o $@ $^ -lbsd -g 
+

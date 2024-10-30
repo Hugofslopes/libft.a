@@ -2,6 +2,45 @@
 #include <stdio.h>
 #include <string.h>
 #include <bsd/string.h>
+#include <stdlib.h>
+
+//function to try iteri
+void touperit(unsigned int c, char *putstr1)
+{
+	if (putstr1[c] >= 'a' && putstr1[c] <= 'z')
+	putstr1[c] -= 32;
+}
+
+//function to try mapi
+char touppermapi(unsigned int index, char c) 
+{
+	(void)index;
+    if (c >= 'a' && c <= 'z') 
+        return c - 32; 
+    return c;
+}
+
+//function for lstiteri
+void print_content(void *content) 
+{
+    printf("%s\n", (char *)content);
+}
+
+//function for lstclear
+void del(void *content)
+{
+	free(content);
+}
+
+//function for lstmap
+void *print_content2(void *content) 
+{
+	char *new_content = strdup((char *)content);
+	if (!new_content) 
+        return NULL; 
+	return new_content;
+}
+
 
 int main()
 {
@@ -469,16 +508,10 @@ int main()
 	free(strtrim2);
 
 //3
-	char	*strtrim3 = ft_strtrim("xxHugox Filxipe", "x");
+	char	*strtrim3 = ft_strtrim("xxHugox Filxipexx", "x");
 	printf("\033[94mResult\033[0m %s\t\t", strtrim3);
 	printf("\033[95mExpected\033[0m Hugox Filxipe \n");
 	free(strtrim3);
-
-//4
-	char	*strtrim4 = ft_strtrim("Hugoxx Filxpe", "xx");
-	printf("\033[94mResult\033[0m %s\t\t", strtrim4);
-	printf("\033[95mExpected\033[0m Hugo Filixpe \n\n");
-	free(strtrim4);
 
 
 //SPLIT
@@ -499,30 +532,152 @@ int main()
 //ITOA
 	printf("\033[107mItoa\033[0m\n");
 //1
-	printf("\033[94mResult\033[0m %s\t\t\t", ft_itoa(123213));
+	char *itoa1 = ft_itoa(123213);
+	printf("\033[94mResult\033[0m %s\t\t\t", itoa1);
 	printf("\033[95mExpected\033[0m 123213 \n");
+	free(itoa1);
 
 //2
-	printf("\033[94mResult\033[0m %s\t\t\t", ft_itoa(-123213));
+	char *itoa2 = ft_itoa(123213);
+	printf("\033[94mResult\033[0m %s\t\t\t", itoa2);
 	printf("\033[95mExpected\033[0m -123213 \n");
+	free(itoa2);
 
 //3
-	printf("\033[94mResult\033[0m %s\t\t\t", ft_itoa(+123213));
+	char *itoa3 = ft_itoa(123213);
+	printf("\033[94mResult\033[0m %s\t\t\t", itoa3);
 	printf("\033[95mExpected\033[0m 123213 \n\n");
+	free(itoa3);
 
 
 //STRMAPI
 	printf("\033[107mStmapi\033[0m\n");
 //1
-	
+	char mapi1[10]= "blue";
+	char *mapi2;
+	mapi2 = ft_strmapi(mapi1, touppermapi);
+	printf("\033[94mResult\033[0m %s\t\t\t", mapi2);
+	printf("\033[95mExpected\033[0m BLUE \n\n");
+	free(mapi2);
 
 //STRITERI
 	printf("\033[107mStriteri\033[0m\n");
 //1
-	char mapi[]= "Lets Go!";
-	ft_striteri(mapi, ft_toupper())
+	char iteri1[10]= "blue";
+	ft_striteri(iteri1, touperit);
+	printf("\033[94mResult\033[0m %s\t\t\t", iteri1);
+	printf("\033[95mExpected\033[0m BLUE \n\n");
 
 
+//LSTNEW
+	printf("\033[107mLstnew\033[0m\n");
+//1
+	int value = 42; 
+    t_list *node = ft_lstnew(&value); 
+    printf("Node created successfully!\n");
+    printf("\033[94mContent:\033[0m %d\n", *(int *)(node->content));
+    printf("\033[94mNext:\033[0m %p\n", node->next); 
+    free(node);
+	puts("");
 
 
-}
+//LSTADDFRONT
+	printf("\033[107mLstadd_front\033[0m\n");
+//1
+	t_list *head = NULL;
+	ft_lstadd_front(&head, ft_lstnew(strdup("First Node")));
+    ft_lstadd_front(&head, ft_lstnew(strdup("Second Node")));
+	t_list *current = head;
+    while (current) 
+	{
+        printf("\033[94mNode content:\033[0m %s\n", (char *)current->content);
+        current = current->next; 
+    }
+	puts("");
+
+
+//LSTSIZE
+	printf("\033[107mLstsize\033[0m\n");
+//1
+	
+	int size = ft_lstsize(head);
+    printf("\033[94mThe size of the list is:\033[0m %d\n", size);
+	puts("");
+
+
+//LSTLAST
+	printf("\033[107mLstlast\033[0m\n");
+//1
+	t_list *last_node = ft_lstlast(head);
+	printf("\033[94mThe last node's content is:\033[0m %s\n", (char *)last_node->content);
+	puts("");
+
+
+//LSTADDBACK
+	printf("\033[107mLstadd_back\033[0m\n");
+//1	
+	ft_lstadd_back(&head, ft_lstnew(strdup("Third Node")));
+	t_list *last_node1 = ft_lstlast(head);
+	printf("\033[94mThe last node's content is:\033[0m %s\n", (char *)last_node1->content);
+	puts("");
+
+
+//LSTITER
+	printf("\033[107mLstiter\033[0m\n");
+//1	
+	ft_lstiter(head, print_content);
+	puts("");
+
+
+//LSTCLEAR
+	printf("\033[107mLstclear\033[0m\n");
+//1	
+	int size2 = ft_lstsize(head);
+	printf("\033[94mThe size of the list is:\033[0m %d\n", size2);
+	if (head) 
+	{
+		ft_lstclear(&head, del);
+		printf("List cleared successfully.\n");
+	} 
+	else 
+		printf("List is empty.\n");
+	puts("");
+
+
+//LSTMAP
+	printf("\033[107mLstmap\033[0m\n");
+//1	
+	t_list *head2 = NULL;
+	t_list *head3;
+	ft_lstadd_front(&head2, ft_lstnew(strdup("First Node")));
+    ft_lstadd_front(&head2, ft_lstnew(strdup("Second Node")));
+	printf("\033[94mContent of head3: \033[0m");
+	head3 = ft_lstmap(head2, print_content2, del);
+	ft_lstiter(head3, print_content);
+	puts("");
+
+
+//LSTDELONE	
+//1	
+	printf("\033[107mLsdelone\033[0m\n");
+	t_list *node_to_delete = head3->next;
+	ft_lstdelone(node_to_delete, del);
+	head3->next = NULL;
+	printf("\033[94mHead3 content After delone: \033[0m");
+	ft_lstiter(head3, print_content);
+	ft_lstclear(&head2, del);
+	ft_lstclear(&head3, del);
+	puts("");
+
+
+if (getenv("RUNNING_UNDER_VALGRIND") == NULL) 
+	{
+        setenv("RUNNING_UNDER_VALGRIND", "1", 1);
+        system("valgrind --leak-check=full \
+		--track-origins=yes \
+		--show-leak-kinds=all \
+		--errors-for-leak-kinds=all \
+		--show-possibly-lost=yes \
+		--track-fds=yes ./main");
+    }
+}	

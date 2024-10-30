@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:25:49 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/24 13:21:24 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/30 14:39:10 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 static char	**malloc_fails(char **ptr, int i)
 {
+	char	**new_ptr;
+
+	new_ptr = ptr;
 	while (i > 0)
 	{
 		i--;
-		free(*ptr++);
+		free(*new_ptr++);
 	}
 	free(ptr);
 	return (0);
@@ -67,11 +70,11 @@ char	**creat_strings(char const *s, char c, char **s2, int n_words)
 	word_len = 0;
 	while (word < n_words)
 	{
-		while (*s && *s == c)
-			s++;
-		while (*s && *s != c)
+		while (s[i] && s[i] == c)
+			i++;
+		while (s[i] && s[i] != c)
 		{
-			s++;
+			i++;
 			word_len++;
 		}
 		s2[word] = (char *)malloc(sizeof(char) * (word_len + 1));

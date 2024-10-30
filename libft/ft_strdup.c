@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:33:57 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/23 15:21:26 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:44:22 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ char	*ft_strdup(char *s)
 	new_string = malloc((ft_strlen(s) + 1) * sizeof(char));
 	if (!new_string)
 		return (NULL);
-	while (*s)
+	while (s[i] != '\0')
 	{
-		new_string[i] = *s++;
+		new_string[i] = s[i];
 		i++;
 	}
 	new_string[i] = '\0';

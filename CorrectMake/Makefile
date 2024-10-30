@@ -6,13 +6,12 @@
 #    By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/26 09:37:48 by hfilipe-          #+#    #+#              #
-#    Updated: 2024/10/30 16:40:48 by hfilipe-         ###   ########.fr        #
+#    Updated: 2024/10/30 14:40:49 by hfilipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 RM = rm -f
-CC = cc
 CFLAGS = -Werror -Wextra -Wall
 SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c \
 ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c \
@@ -27,18 +26,17 @@ OBJ = $(SRC:.c=.o)
 BONUS_OBJ = $(BONUS_SRCS:.c=.o) 
 
 all: $(NAME)
+
 $(NAME): $(OBJ)
-	@ar rcs $@ $^	
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@ar rcs $(NAME) $(OBJ)
+
+bonus: $(NAME) $(BONUS_OBJ)
+	@ar rcs $(NAME) $(BONUS_OBJ)
 
 clean:
-	@rm -f $(OBJ) $(BONUS_OBJ)
+	@$(RM) $(OBJ) $(BONUS_OBJ) 
 
 fclean: clean
-	@rm -f $(NAME) $(EXEC)
+	@$(RM) $(NAME) 
 
 re: fclean all
-
-bonus: $(OBJ) $(BONUS_OBJ)
-	@ar rcs $(NAME) $^

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfilipe- <hfilipe-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 13:55:24 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/17 14:13:58 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/30 12:11:25 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ void	ft_bzero(void *ptr, size_t n)
 	i = 0;
 	str = (char *)ptr;
 	while (i < n)
-		str[i++] = 0;
+		str[i++] = '\0';
 }

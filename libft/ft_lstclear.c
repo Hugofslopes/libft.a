@@ -6,7 +6,7 @@
 /*   By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 15:46:15 by hfilipe-          #+#    #+#             */
-/*   Updated: 2024/10/23 16:01:51 by hfilipe-         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:37:53 by hfilipe-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	{
 		tmp_list = (*lst)->next;
 		ft_lstdelone(*lst, del);
-		(*lst) = tmp_list;
+		*lst = tmp_list;
 	}
 }

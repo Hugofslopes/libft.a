@@ -6,7 +6,7 @@
 #    By: hfilipe- <hfilipe-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/16 11:51:18 by hfilipe-          #+#    #+#              #
-#    Updated: 2024/10/23 16:47:40 by hfilipe-         ###   ########.fr        #
+#    Updated: 2024/10/29 17:17:11 by hfilipe-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,6 @@ $(OBJ_PATH)/%.o: $(BUILD_PATH)/%.c
 	@mkdir -p $(OBJ_PATH)
 	@$(CC) -I./$(HEAD) $(CFLAGS) -c $< -o $@
 	
-
 clean: 
 	@$(RM) $(OBJ_FILES) $(BONUS_OBJ_FILES)
 	@echo "Objects successfully removed"
